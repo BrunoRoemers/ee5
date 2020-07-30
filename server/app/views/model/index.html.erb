@@ -1,0 +1,356 @@
+<header class="sticky top-0 bg-gray-300">
+  <nav>
+    <ul class="flex justify-around">
+      <li><a href="#users">users</a></li>
+      <li><a href="#stays">stays</a></li>
+      <li><a href="#group-activities">group activities</a></li>
+      <li><a href="#milestone-types">milestone types</a></li>
+      <li><a href="#milestones">milestones</a></li>
+      <li><a href="#responsibility-types">responsibility types</a></li>
+      <li><a href="#responsibilities">responsibilities</a></li>
+      <li><a href="#violations">violations</a></li>
+      <li><a href="#sport-bans">sport bans</a></li>
+      <li><a href="#doctor-appointments">doctor appointments</a></li>
+      <li><a href="#diary-entries">diary entries</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section>
+  <a id="users" href="#users">
+    <h1 class="text-3xl">Users</h1>
+  </a>
+  <table class="w-full">
+    <thead class="font-bold">
+      <tr>
+      <td>Id</td>
+        <td>Full Name</td>
+        <td>Display Name</td>
+        <td>Birthday</td>
+        <td>Email Address</td>
+        <td>Stay ids</td>
+        <td>Godchild ids</td>
+        <td>Milestones</td>
+        <td>Responsibilities</td>
+        <td>Violations</td>
+        <td>Sport Bans</td>
+        <td>Doctor Appointments</td>
+        <td>Diary Entries</td>
+        <td>Browser session</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.full_name || '[null]' %></td>
+          <td><%= user.display_name || '[null]' %></td>
+          <td><%= user.birthday || '[null]' %></td>
+          <td><%= user.email %></td>
+          <td><%= user.stays.map { |stay| stay.id } %></td>
+          <td><%= user.godchildren.map { |godchild| godchild.id } %></td>
+          <td><%= user.milestones.map { |m| m.id } %></td>
+          <td><%= user.responsibilities.map { |r| r.id } %></td>
+          <td><%= user.violations.map { |v| v.id } %></td>
+          <td><%= user.sport_bans.map { |sb| sb.id } %></td>
+          <td><%= user.doctor_appointments.map { |da| da.id } %></td>
+          <td><%= user.diary_entries.map { |de| de.id } %></td>
+          <% if @current_user_id === user.id %>
+            <td>[logged in]</td>
+          <% else %>
+            <td>?</td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<section class="mt-10">
+  <a id="stays" href="#stays">
+    <h1 class="text-3xl">Stays</h1>
+  </a>
+  <table class="w-full">
+    <thead class="font-bold">
+      <tr>
+        <td>Id</td>
+        <td>Patient id</td>
+        <td>Start at</td>
+        <td>End at</td>
+        <td>Godparent id</td>
+        <td>Room nr</td>
+        <td>Milestones</td>
+        <td>Responsibilities</td>
+        <td>Violations</td>
+        <td>Sport Bans</td>
+        <td>Doctor Appointments</td>
+        <td>Diary entries</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @stays.each do |stay| %>
+        <tr>
+          <td><%= stay.id %></td>
+          <td><%= stay.patient.id %></td>
+          <td><%= stay.start_at %></td>
+          <td><%= stay.end_at || '[null]' %></td>
+          <td><%= stay.godparent&.id || '[null]' %></td>
+          <td><%= stay.room_nr %></td>
+          <td><%= stay.milestones.map { |m| m.id } %></td>
+          <td><%= stay.responsibilities.map { |r| r.id } %></td>
+          <td><%= stay.violations.map { |v| v.id } %></td>
+          <td><%= stay.sport_bans.map { |sb| sb.id } %></td>
+          <td><%= stay.doctor_appointments.map { |da| da.id } %></td>
+          <td><%= stay.diary_entries.map { |de| de.id } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<section class="mt-10">
+  <a id="group-activities" href="#group-activities">
+    <h1 class="text-3xl">Group Activities</h1>
+  </a>
+  <table class="w-full">
+    <thead class="font-bold">
+      <tr>
+        <td>Id</td>
+        <td>Title</td>
+        <td>Start at</td>
+        <td>End at</td>
+        <td>Repeat every</td>
+        <td>Repeat until</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @activities.each do |activity| %>
+        <tr>
+          <td><%= activity.id %></td>
+          <td><%= activity.title %></td>
+          <td><%= activity.start_at %></td>
+          <td><%= activity.end_at %></td>
+          <td><%= activity.repeat_every || '[one time only]' %></td>
+          <td><%= activity.repeat_until || '[repeat infinitely]' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<section class="mt-10">
+  <a id="milestone-types" href="#milestone-types">
+    <h1 class="text-3xl">Milestone Types</h1>
+  </a>
+  <table class="w-full">
+    <thead class="font-bold">
+      <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Major?</td>
+        <td>Previous Milestone Type</td>
+        <td>Milestones</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @milestone_types.each do |mt| %>
+        <tr>
+          <td><%= mt.id %></td>
+          <td><%= mt.name %></td>
+          <td><%= mt.major %></td>
+          <td><%= mt.previous_milestone_type&.id || '[null]' %></td>
+          <td><%= mt.milestones.map { |m| m.id } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<section class="mt-10">
+  <a id="milestones" href="#milestones">
+    <h1 class="text-3xl">Milestones</h1>
+  </a>
+  <table class="w-full">
+    <thead class="font-bold">
+      <tr>
+        <td>Id</td>
+        <td>Milestone type id</td>
+        <td>Stay id</td>
+        <td>Negate?</td>
+        <td>Reason</td>
+        <td>Created at</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @milestones.each do |m| %>
+        <tr>
+          <td><%= m.id %></td>
+          <td><%= m.milestone_type.id %></td>
+          <td><%= m.stay.id %></td>
+          <td><%= m.negate %></td>
+          <td><%= m.reason || '[null]' %></td>
+          <td><%= m.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<section class="mt-10">
+  <a id="responsibility-types" href="#responsibility-types">
+    <h1 class="text-3xl">Responsibility Types</h1>
+  </a>
+  <table class="w-full">
+    <thead class="font-bold">
+      <tr>
+        <td>Id</td>
+        <td>Name</td>
+        <td>Responsibilities</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @responsibility_types.each do |r| %>
+        <tr>
+          <td><%= r.id %></td>
+          <td><%= r.name %></td>
+          <td><%= r.responsibilities.map { |r| r.id } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<section class="mt-10">
+  <a id="responsibilities" href="#responsibilities">
+    <h1 class="text-3xl">Responsibilities</h1>
+  </a>
+  <table class="w-full">
+    <thead class="font-bold">
+      <tr>
+        <td>Id</td>
+        <td>Responsibility type id</td>
+        <td>Stay id</td>
+        <td>Start at</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @responsibilities.each do |r| %>
+        <tr>
+          <td><%= r.id %></td>
+          <td><%= r.responsibility_type.id %></td>
+          <td><%= r.stay.id %></td>
+          <td><%= r.start_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<section class="mt-10">
+  <a id="violations" href="#violations">
+    <h1 class="text-3xl">Violations</h1>
+  </a>
+  <table class="w-full">
+    <thead class="font-bold">
+      <tr>
+        <td>Id</td>
+        <td>Stay id</td>
+        <td>Reason</td>
+        <td>Created at</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @violations.each do |v| %>
+        <tr>
+          <td><%= v.id %></td>
+          <td><%= v.stay.id %></td>
+          <td><%= v.reason || '[null]' %></td>
+          <td><%= v.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<section class="mt-10">
+  <a id="sport-bans" href="#sport-bans">
+    <h1 class="text-3xl">Sport Bans</h1>
+  </a>
+  <table class="w-full">
+    <thead class="font-bold">
+      <tr>
+        <td>Id</td>
+        <td>Stay id</td>
+        <td>Negate?</td>
+        <td>Reason</td>
+        <td>Created at</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @sport_bans.each do |sb| %>
+        <tr>
+          <td><%= sb.id %></td>
+          <td><%= sb.stay.id %></td>
+          <td><%= sb.negate %></td>
+          <td><%= sb.reason || '[null]' %></td>
+          <td><%= sb.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<section class="mt-10">
+  <a id="doctor-appointments" href="#doctor-appointments">
+    <h1 class="text-3xl">Doctor Appointments</h1>
+  </a>
+  <table class="w-full">
+    <thead class="font-bold">
+      <tr>
+        <td>Id</td>
+        <td>Stay id</td>
+        <td>Start at</td>
+        <td>End at</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @doctor_appointments.each do |da| %>
+        <tr>
+          <td><%= da.id %></td>
+          <td><%= da.stay.id %></td>
+          <td><%= da.start_at %></td>
+          <td><%= da.end_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<section class="mt-10">
+  <a id="diary-entries" href="#diary-entries">
+    <h1 class="text-3xl">Diary Entries</h1>
+  </a>
+  <table class="w-full">
+    <thead class="font-bold">
+      <tr>
+        <td>Id</td>
+        <td>Stay id</td>
+        <td>Content</td>
+        <td>Created at</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @diary_entries.each do |de| %>
+        <tr>
+          <td><%= de.id %></td>
+          <td><%= de.stay.id %></td>
+          <td><%= de.content %></td>
+          <td><%= de.created_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<div class="h-screen bg-gray-300"></div>
+

@@ -1,0 +1,8 @@
+<% filter = local_assigns[:filter] %>
+<% errors = local_assigns[:errors].messages[filter] %>
+
+<% errors.each do |msg| %>
+<div class="ml-4 mt-1 text-red-600">
+  <%= msg %>
+</div>
+<% end %>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TODO: TV Title</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render 'layouts/alerts', class: 'ml-24' %>
+    <div class="fixed w-24 h-screen">
+      <%= render 'layouts/tv/menu' %>
+    </div>
+    <div class="ml-24">
+      <%= yield %>
+    </div>
+  </body>
+</html>

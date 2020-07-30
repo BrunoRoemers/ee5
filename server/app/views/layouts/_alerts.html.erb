@@ -1,0 +1,17 @@
+<% unless alerts.empty? %>
+  <div id="alert-wrapper" class="fixed left-0 right-0 h-0 z-30 <%= local_assigns[:class] %>">
+    <% alerts.each_with_index do |alert, index| %>
+      <%
+        id = 'alert-' + index.to_s
+        clx = alert_class alert['type']
+        clx += ' relative mx-auto w-11/12 mt-3 px-4 pr-11 py-2 rounded-lg max-w-3xl shadow-lg'
+      %>
+      <div id="<%= id %>" class="<%= clx %>">
+        <div class="absolute right-0 py-2 -my-2 px-4 hover:text-white cursor-pointer" data-close-alert="<%= id %>">
+          <i class="fas fa-times"></i>
+        </div>
+        <%= alert['message'] %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

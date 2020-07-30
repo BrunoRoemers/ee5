@@ -1,0 +1,13 @@
+<% completed = local_assigns[:completed] %>
+<% total = local_assigns[:total] %>
+<% fraction_remaining = 100 - 100 * completed / total.to_f %>
+<% bg_class = local_assigns[:active_now] ? ' bg-green-300' : ' bg-gray-300' %>
+<% progress_class = local_assigns[:active_now] ? ' bg-green-500' : ' bg-gray-500' %>
+<div
+  class="relative w-full h-3<%= bg_class %>"
+>
+  <div
+    class="absolute<%= progress_class %>"
+    style="top: 0; bottom: 0; left: 0; right: <%= fraction_remaining %>%;"
+  ></div>
+</div>

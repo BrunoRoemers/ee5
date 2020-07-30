@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Server</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%# NOTE: CSS via Asset pipeline not loaded %>
+    <%# <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <%= render 'layouts/alerts' %>
+    <div class="flex flex-wrap h-screen justify-end bg-page">
+      <div class="flex flex-wrap w-full xs:w-96 content-center bg-card px-4 xs:px-16 py-12">
+        <div class="w-full pb-10"><%# Optically center with extra padding on bottom %>
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

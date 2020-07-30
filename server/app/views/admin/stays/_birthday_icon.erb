@@ -1,0 +1,6 @@
+<% icon_class = local_assigns[:birthday_now] ? '' : ' text-gray-300' %>
+<% tooltip = local_assigns[:birthday_now] ? 'birthday!' : 'no birthday' %>
+<i
+  class="fas fa-birthday-cake mx-1<%= icon_class %>"
+  title="<%= tooltip %>"
+></i>

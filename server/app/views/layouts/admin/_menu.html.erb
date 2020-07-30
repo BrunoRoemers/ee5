@@ -1,0 +1,13 @@
+<nav class="sticky top-0 h-screen flex flex-col justify-between pl-2">
+  <div>
+    <%= menu_link ['/', dashboard_path], 'fa-home', dashboard_path %>
+    <%= menu_link people_path, 'fa-address-card', people_path %>
+    <%= menu_link [stays_path, stays_new_path], 'fa-users', stays_path %>
+    <%= menu_link nil, 'fa-calendar-alt', '#calendar' %>
+    <%= menu_link nil, 'fa-chart-bar', '#progress' %>
+  </div>
+  <div>
+    <%= menu_link nil, 'fa-desktop', tv_path, target: :_blank %>
+    <%= menu_link nil, 'fa-sign-out-alt', destroy_user_session_path, method: :delete %>
+  </div>
+</nav>

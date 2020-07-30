@@ -1,0 +1,16 @@
+<nav class="fixed w-24 h-screen bg-gray-300">
+  <div class="top-0 absolute">
+    <%= menu_link ['/tv', '/tv/progress_table'], 'fa-chart-bar', tv_progress_table_path %>
+    <%= menu_link '/tv/progress_animation', 'fa-images', tv_progress_animation_path %>
+    <%= menu_link '/tv/data', 'fa-info-circle', tv_data_path %>
+  </div>
+  <div class="bottom-0 absolute">	
+    <%# <a href="#" class="flex flex-wrap content-center h-24 p-5">
+      <span class="fa-stack fa-1g opacity-50 visited:opacity-100 hover:opacity-100">
+        <i class="fa-3x opacity-75 fas fa-calendar-alt "></i>
+        <i class="fa-3x fas fa-arrows-alt-h " data-fa-transform="up-12 right-6"></i>
+      </span>
+    </a> %>
+    <%= menu_link nil, 'fa-sign-out-alt', destroy_user_session_path, method: :delete %>
+  </div>
+</nav>

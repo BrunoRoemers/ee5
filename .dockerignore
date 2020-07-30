@@ -1,0 +1,5 @@
+# Inspired by https://codefresh.io/docker-tutorial/not-ignore-dockerignore-2/
+.git
+.postgres
+**/node_modules
+**/tmp

@@ -1,0 +1,66 @@
+<header class="py-6 flex items-center">
+  <h1 class="flex-grow text-4xl leading-none">
+    Enroll a user in the program
+  </h1>
+</header>
+<div class="bg-white rounded-md w-full shadow overflow-hidden px-10 py-6">
+  <%= form_with url: stays_create_path, model: @stay, local: true do |f| %>
+    <div class="sm:grid gap-4 grid-cols-3 max-w-screen-md">
+      <% label_class = 'block py-2' %>
+      <% field_class = 'w-full bg-gray-200 rounded py-2 px-4 border-2 border-gray-200 focus:bg-white focus:border-gray-500' %>
+
+      <%# Validation errors %>
+      <% if @stay.errors.any? %>
+        <div class="col-start-2 col-span-2">
+          <span class="text-red-600 font-bold">An error occured while processing the form</span>
+        </div>
+      <% end %>
+
+      <%# Patient %>
+      <div>
+        <%= f.label :patient_id, 'User *',
+          class: label_class
+        %>
+      </div>
+      <div class="col-span-2">
+        <div class="inline-block relative w-64">
+          <% select_class = 'block appearance-none w-full bg-white hover:border-gray-500 px-4 py-1 pr-8 rounded shadow leading-tight' %>
+          <%= select_tag(:patient_id,
+            options_for_select(@select_users),
+            id: 'filter-form-status',
+            class: select_class)
+          %>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+              <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
+            </svg>
+          </div>
+        </div>
+        <%= render 'form_error', filter: :patient, errors: @stay.errors %>  
+      </div>
+
+      <%# Stay start date %>
+      <div>
+        <%= f.label :start_at, 'Day of arrival *',
+          class: label_class
+        %>
+      </div>
+      <div class="col-span-2">
+        <%= f.date_field :start_at,
+          placeholder: '2202',
+          autocomplete: '',
+          class: field_class,
+          autofocus: true
+        %>
+        <%= render 'form_error', filter: :start_at, errors: @stay.errors %>  
+      </div>
+
+      <%# Submit %>
+      <div class="col-start-2 mt-4 sm:mt-0">
+        <%= f.submit 'Enroll patient',
+          class: 'w-full bg-green-400 rounded py-2 px-4 focus:outline-none hover:bg-green-600 focus:bg-green-600 cursor-pointer'
+        %>
+      </div>
+    </div>
+  <% end %>
+</div>

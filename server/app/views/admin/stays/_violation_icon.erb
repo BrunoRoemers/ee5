@@ -1,0 +1,21 @@
+<% red_class = local_assigns[:red] ? ' z-10 bg-red-600' : ' bg-gray-300' %>
+<% yellow_class = local_assigns[:yellow] ? ' bg-yellow-500' : ' bg-gray-300' %>
+<% tooltip = "no violations" %>
+<% tooltip = "yellow card" if local_assigns[:yellow] %>
+<% tooltip = "red card" if local_assigns[:red] %>
+<% tooltip = "yellow and red card" if local_assigns[:yellow] && local_assigns[:red] %>
+<div
+  class="inline-block relative w-5 h-6 mx-1"
+  title="<%= tooltip %>"
+>
+  <div
+    aria-label="red card"
+    class="absolute w-4 h-5<%= red_class %>"
+    style="left: 0.25rem;"
+  ></div>
+  <div
+    aria-label="yellow card"
+    class="absolute w-4 h-5<%= yellow_class %>"
+    style="top: 0.25rem;"
+  ></div>
+</div>

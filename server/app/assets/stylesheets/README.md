@@ -1,0 +1,3 @@
+# Modern times...
+We ditched the Asset Pipeline and use Webpack to serve our stylesheets.
+They are located in `app/javascript/stylesheets`.

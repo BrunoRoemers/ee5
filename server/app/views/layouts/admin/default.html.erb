@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TODO: Admin Title</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="bg-gray-100 min-h-screen">
+    <%= render 'layouts/alerts', class: 'ml-24' %>
+    <div class="flex">
+      <%= render 'layouts/admin/menu' %>
+      <div class="flex-grow pl-7 pr-10">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

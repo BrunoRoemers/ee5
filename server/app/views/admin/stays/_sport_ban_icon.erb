@@ -1,0 +1,6 @@
+<% icon_class = local_assigns[:sport_ban_now] ? '' : ' text-gray-300' %>
+<% tooltip = local_assigns[:sport_ban_now] ? 'sports ban active' : 'free to sport' %>
+<i
+  class="fas fa-ban mx-1<%= icon_class %>"
+  title="<%= tooltip %>"
+></i>

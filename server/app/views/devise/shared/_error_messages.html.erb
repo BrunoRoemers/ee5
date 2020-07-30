@@ -1,0 +1,12 @@
+<% if resource.errors.any? %>
+  <div class="mb-6">
+    <ul class="text-red-700">
+      <% resource.errors.full_messages.each do |message| %>
+        <li class="mb-1 relative">
+          <i class="fas fa-exclamation-circle absolute top-icon"></i>
+          <span class="pl-6 inline-block relative"><%= message %></span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

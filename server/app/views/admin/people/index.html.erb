@@ -1,0 +1,66 @@
+<header class="py-6 flex items-center">
+  <h1 class="flex-grow text-4xl leading-none">
+    People
+  </h1>
+  <div class="">
+    <%= render 'filters', status_filter: @status_filter %>
+  </div>
+  <div class="ml-4">
+    <% plus_class = 'hover:text-blue-700' %>
+    <%= link_to people_new_path, title: 'Add person', class: plus_class do %>
+      <i aria-label="Add person" class="fas fa-plus"></i>
+    <% end %>
+  </div>
+</header>
+<table class="index-table bg-white rounded-md w-full shadow overflow-hidden">
+  <%# Header %>
+  <thead class="text-lg font-bold">
+    <tr>
+      <td>
+        Role
+      </td>
+      <td class="">
+        Name
+      </td>
+      <td class="">
+        Full name
+      </td>
+      <td class="">
+        Email
+      </td>
+      <td>
+        <%# Actions %>
+      </td>
+    </tr>
+  </thead>
+
+  <%# Generate rows %>
+  <tbody>
+    <% @rows.each do |row| %>
+    <tr>
+      <td>
+        <%# Role %>
+        <%= row[:role] %>
+      </td>
+      <td>
+        <%# Name %>
+        <%= row[:name] %>
+      </td>
+      <td>
+        <%# Full name %>
+        <%= row[:full_name] %>
+      </td>
+      <td>
+        <%# Email %>
+        <%= row[:email] %>
+      </td>
+      <td>
+        <% edit_class = 'hover:text-blue-700' %>
+        <%= link_to people_edit_path(id: row[:id]), title: 'Edit user', class: edit_class do %>
+          <i aria-label="edit user" class="fas fa-edit"></i>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

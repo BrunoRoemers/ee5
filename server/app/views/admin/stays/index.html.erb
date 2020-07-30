@@ -1,0 +1,85 @@
+<header class="py-6 flex items-center">
+  <h1 class="flex-grow text-4xl leading-none">
+    Stays
+  </h1>
+  <div class="">
+    <%= render 'filters', status_filter: @status_filter %>
+  </div>
+  <div class="ml-4">
+    <% plus_class = 'hover:text-blue-700' %>
+    <%= link_to stays_new_path, title: 'Enroll new patient', class: plus_class do %>
+      <i aria-label="create new patient" class="fas fa-plus"></i>
+    <% end %>
+  </div>
+</header>
+<table class="index-table bg-white rounded-md w-full shadow overflow-hidden">
+  <%# Header %>
+  <thead class="text-lg font-bold">
+    <tr>
+      <td class="w-64">
+        Name
+      </td>
+      <td>
+        <%# Icons %>
+      </td>
+      <td>
+        Admission Date
+      </td>
+      <td>
+        Duration
+      </td>
+      <td>
+        Progress
+      </td>
+      <td>
+      <%# Actions %>
+      </td>
+    </tr>
+  </thead>
+
+  <%# Generate rows %>
+  <tbody>
+    <% @rows.each do |row| %>
+    <tr>
+      <td>
+        <%# Name %>
+        <%= row[:name] %>
+      </td>
+      <td class="flex items-center">
+        <%# Icons %>
+        <%= render 'violation_icon', yellow: row[:yellow_card_now], red: row[:red_card_now] %>
+        <%= render 'sport_ban_icon', sport_ban_now: row[:sport_ban_now] %>
+        <%= render 'birthday_icon', birthday_now: row[:birthday_now] %>
+      </td>
+      <td>
+        <%# Admission Date %>
+        <%= row[:stay_start_at] %>
+      </td>
+      <td>
+        <%# Stay duration %>
+        <% if row[:stay_duration].nil? %>
+          <span class="italic">active</span>
+        <% else %>
+          <%= row[:stay_duration] %> days
+        <% end %>
+      </td>
+      <td>
+        <%# Milestones %>
+        <%=
+          render 'milestones_progress_bar',
+                 completed: row[:completed_milestone_count],
+                 total: @total_milestone_count,
+                 active_now: row[:stay_duration].nil?
+        %>
+      </td>
+      <td>
+        <%# Actions %>
+        <% edit_class = 'hover:text-blue-700' %>
+        <%= link_to stays_edit_path(id: row[:id]), title: 'Edit stay', class: edit_class do %>
+          <i aria-label="edit stay" class="fas fa-edit"></i>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

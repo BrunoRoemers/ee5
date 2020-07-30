@@ -1,0 +1,12 @@
+<div class="flex flex-wrap h-screen w-screen content-center justify-center">
+  <div class="max-w-login bg-gray-300 h-auto px-20 py-16 xs:mx-4 xs:rounded-md text-center">
+    <h1 class="text-2xl font-medium mx-auto pb-3 font-heading">Management Landing Page</h1>
+    <%# Devise gem (login/logout) intro: https://www.youtube.com/watch?reload=9&v=7v2EMmfBJL8 %>
+    <% if current_user %>
+      <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to 'Sign up', new_user_registration_path %>
+      <%= link_to 'Sign in', new_user_session_path %>
+    <% end %>
+  </div>
+</div>

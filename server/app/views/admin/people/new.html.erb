@@ -1,0 +1,107 @@
+<header class="py-6 flex items-center">
+  <h1 class="flex-grow text-4xl leading-none">
+    Add a new user
+  </h1>
+</header>
+<div class="bg-white rounded-md w-full shadow overflow-hidden px-10 py-6">
+  <%= form_with url: people_create_path, model: @user, local: true do |f| %>
+    <div class="sm:grid gap-4 grid-cols-3 max-w-screen-md">
+      <% label_class = 'block py-2' %>
+      <% field_class = 'w-full bg-gray-200 rounded py-2 px-4 border-2 border-gray-200 focus:bg-white focus:border-gray-500' %>
+
+      <%# Validation errors %>
+      <% if @user.errors.any? %>
+        <div class="col-start-2 col-span-2">
+          <span class="text-red-600 font-bold">An error occured while processing the form</span>
+        </div>
+      <% end %>
+
+      <%# Full name %>
+      <div>
+        <%= f.label :full_name, 'full_name *',
+          class: label_class
+        %>
+      </div>
+      <div class="col-span-2">
+        <%= f.text_field :full_name,
+          placeholder: 'John Doe',
+          autocomplete: 'name',
+          class: field_class,
+          autofocus: true
+        %>
+        <%= render 'form_error', filter: :full_name, errors: @user.errors %>  
+      </div>
+
+      <%# Display name %>
+      <div>
+        <%= f.label :display_name, 'display name',
+          class: label_class
+        %>
+      </div>
+      <div class="col-span-2">
+        <%= f.text_field :display_name,
+          placeholder: 'Johnny',
+          autocomplete: 'nickname',
+          class: field_class,
+          autofocus: true
+        %>
+        <%= render 'form_error', filter: :display_name, errors: @user.errors %>  
+      </div>
+
+      <%# Email %>
+      <div>
+        <%= f.label :email, 'email address *',
+          class: label_class
+        %>
+      </div>
+      <div class="col-span-2">
+        <%= f.email_field :email,
+          placeholder: 'info@example.com',
+          autocomplete: 'email',
+          class: field_class,
+          autofocus: true
+        %>
+        <%= render 'form_error', filter: :email, errors: @user.errors %>  
+      </div>
+
+      <%# Password %>
+      <div>
+        <%= f.label :password, 'password *',
+          class: label_class
+        %>
+      </div>
+      <div class="col-span-2">
+        <%= f.password_field :password,
+          placeholder: '**************************',
+          autocomplete: 'new-password',
+          class: field_class,
+          autofocus: true
+        %>
+        <%= render 'form_error', filter: :password, errors: @user.errors %>  
+      </div>
+
+      <%# Confirm password %>
+      <div>
+        <%= f.label :password_confirmation, 'Confirm password *',
+          class: label_class
+        %>
+      </div>
+      <div class="col-span-2">
+        <%= f.password_field :password_confirmation,
+          placeholder: '**************************',
+          autocomplete: 'new-password',
+          class: field_class,
+          autofocus: true
+        %>
+        <%= render 'form_error', filter: :password_confirmation, errors: @user.errors %>  
+      </div>
+
+      <%# Submit %>
+      <div class="col-start-2 mt-4 sm:mt-0">
+        <%= f.submit 'Add user',
+          class: 'w-full bg-green-400 rounded py-2 px-4 focus:outline-none hover:bg-green-600 focus:bg-green-600'
+        %>
+      </div>
+    </div>
+  <% end %>
+</div>

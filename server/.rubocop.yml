@@ -1,0 +1,21 @@
+require: rubocop-rails
+
+# source: https://stackoverflow.com/questions/38325533/disable-frozen-string-literal-comment-checking
+# frozen string literals in rails: https://freelancing-gods.com/2017/07/27/friendly-frozen-string-literals.html
+# NOTE: opt-in env var for frozen-string-literal friendly packages?
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Style/Documentation:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
+
+AllCops:
+  Exclude:
+    - "**/*.erb"
+    - "db/schema.rb"

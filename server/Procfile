@@ -1,0 +1,4 @@
+# Following commands will be executed by foreman start
+rails: bundle exec rails s -p $RAILS_PORT -b '0.0.0.0'
+webpack: if [ -z $USE_WEBPACKER ]; then echo "Webpack Dev Server has been disabled in docker-compose.yml (please compile your assets manually)"; sleep infinity; else bin/webpack-dev-server; fi # js, css compile and livereload
+guard: if [ -z $USE_LIVERELOAD ]; then echo "Guard Livereload has been disabled in docker-compose.yml"; sleep infinity; else bundle exec guard start --group=development --no-interactions; fi # erb, html livereload
